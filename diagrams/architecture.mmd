@@ -1,0 +1,39 @@
+
+flowchart TD
+    User([Pet Owner])
+
+    subgraph UI["Streamlit Interface - app.py"]
+        A[Owner Name Input]
+        B[Add Pet Form]
+        C[Schedule Task Form]
+        D[Daily Schedule Display]
+        E[Conflict Warnings]
+        F[Session State]
+    end
+
+    subgraph Core["Core System - pawpal_system.py"]
+        Owner[Owner]
+        Pet[Pet]
+        Task[Task]
+        Scheduler[Scheduler]
+    end
+
+    User --> A
+    User --> B
+    User --> C
+    User --> D
+
+    A --> F
+    F --> Owner
+    B --> Owner
+    Owner --> Pet
+    C --> Task
+    Task --> Pet
+
+    D --> Scheduler
+    E --> Scheduler
+    Scheduler --> Owner
+    Scheduler --> Task
+
+    Owner --> Pet
+    Pet --> Task
